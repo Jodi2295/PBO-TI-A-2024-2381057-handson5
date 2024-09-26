@@ -18,14 +18,15 @@ public class Main {
         System.out.println("TODO LIST");
         for (int i = 0; i < todos.length; i++) {
             String todo = todos[i];
-            if (todos[i] != null) {
-                System.out.println((i + 1) + ". " + todo);
+            if (todos[i] == null) {
+                todos[i] = todo;
+                break;
             }
         }
     }
 
     public static void addTodoList(String todo) {
-        resizeArrayIfFull();
+        resizeArrayFull();
 
         for (int i = 0; i < todos.length; i++) {
             if (todos[i] == null) {
@@ -35,9 +36,8 @@ public class Main {
         }
     }
 
-    private static void resizeArrayIfFull() {
+    private static void resizeArrayFull() {
         boolean isFull = isArrayFull();
-
 
         if (isFull) {
             resizeArrayToTwoTimesBigger();
@@ -46,7 +46,7 @@ public class Main {
 
     private static void resizeArrayToTwoTimesBigger() {
         String[] temp = todos;
-        todos = new String[todos.length * 2];
+        todos = new String[todos.length *2];
         for (int i = 0; i < temp.length; i++) {
             todos[i] = temp[i];
         }
@@ -55,7 +55,7 @@ public class Main {
     private static boolean isArrayFull() {
         boolean isFull = true;
         for (int i = 0; i < todos.length; i++) {
-            if (todos[i] == null) {
+            if (todos[1] == null) {
                 isFull = false;
                 break;
             }
@@ -67,13 +67,12 @@ public class Main {
         if (isSelectedTodoNotValid(number))
             return false;
 
-        for (int i = number - 1; i < todos.length; i++) {
-            if (i == (todos.length - 1)) {
+        for (int i = number -1; i < todos.length; i++) {
+            if (i == (todos.length -1)) {
                 todos[i] = null;
             } else {
                 todos[i] = todos[i + 1];
             }
-
         }
         return true;
     }
@@ -83,11 +82,11 @@ public class Main {
             return true;
         }
 
-        if (number - 1 > todos.length - 1) {
+        if (number -1 > todos.length -1) {
             return true;
         }
 
-        if (todos[number - 1] == null) {
+        if (todos[number -1] == null) {
             return true;
         }
         return false;
@@ -97,7 +96,7 @@ public class Main {
         if (isSelectedTodoNotValid(number)) {
             return false;
         }
-        todos[number - 1] = newTodo;
+        todos[number -1] = newTodo;
         return true;
     }
 
@@ -118,7 +117,7 @@ public class Main {
                     break;
                 case "3":
                     break;
-                case "4:":
+                case "4":
                     isRunning = false;
                     break;
                 default:
